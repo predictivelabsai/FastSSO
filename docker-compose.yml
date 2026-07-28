@@ -1,0 +1,17 @@
+services:
+  fastsso:
+    build: .
+    ports:
+      - "5015:5015"
+    environment:
+      FASTSSO_BASE_URL: http://localhost:5015
+      FASTSSO_DB: /data/fastsso.sqlite
+      FASTSSO_KEY_DIR: /keys
+      FASTSSO_ADMIN_TOKEN: ${FASTSSO_ADMIN_TOKEN:-local-development-only}
+    volumes:
+      - fastsso-data:/data
+      - fastsso-keys:/keys
+
+volumes:
+  fastsso-data:
+  fastsso-keys:
