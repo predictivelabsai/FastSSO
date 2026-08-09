@@ -113,6 +113,21 @@ gates that must pass before the adapter can replace its fail-closed boundary.
 docker compose up --build
 ```
 
+## Deployment
+
+FastSSO is catalogued in the sibling FastDevOps control plane and deploys from
+`main` to `https://sso.fastsme.com`. With FastDevOps checked out beside this
+repository:
+
+```bash
+python scripts/coolify.py status
+python scripts/coolify.py env --sync --yes
+python scripts/coolify.py deploy --yes
+```
+
+Copy `.env.coolify.sample` entries into the ignored `.env`; never commit API
+tokens or the FastSSO admin token.
+
 Read [architecture](docs/ARCHITECTURE.md),
 [the threat model](docs/THREAT_MODEL.md), and
 [the implementation roadmap](docs/ROADMAP.md) before extending protocol code.
