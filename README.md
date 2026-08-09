@@ -116,9 +116,9 @@ docker compose up --build
 ## Deployment
 
 FastSSO is catalogued in the sibling FastDevOps control plane and deploys from
-`main` to `https://sso.fastsme.com`. An active push-only GitHub webhook starts
-the Coolify deployment automatically. With FastDevOps checked out beside this
-repository:
+`main` to `https://sso.fastsme.com`. A push-only GitHub webhook is configured
+as the intended automatic deployment path. With FastDevOps checked out beside
+this repository:
 
 ```bash
 python scripts/coolify.py status
