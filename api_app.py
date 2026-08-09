@@ -17,6 +17,7 @@ from pydantic import BaseModel, Field
 import db
 from providers import public_presets
 from security import SigningKey, b64url, digest, verify_secret
+from web_pages import landing_page, saaspass_guide_page
 
 load_dotenv()
 
@@ -83,6 +84,16 @@ def esc(value: object) -> str:
 
 
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
+def product_landing() -> str:
+    return landing_page()
+
+
+@app.get("/integrations/saaspass", response_class=HTMLResponse, include_in_schema=False)
+def saaspass_integration_guide() -> str:
+    return saaspass_guide_page()
+
+
+@app.get("/admin", response_class=HTMLResponse, include_in_schema=False)
 def dashboard() -> str:
     apps = db.rows("SELECT name,client_id,redirect_uris,active FROM applications")
     orgs = db.rows(
@@ -116,7 +127,7 @@ section{{background:white;padding:20px;border:1px solid #dde3ef;border-radius:10
 table{{border-collapse:collapse;width:100%}}td,th{{padding:9px;border-bottom:1px solid #edf0f5;text-align:left}}
 code{{background:#edf1f7;padding:2px 5px;border-radius:4px}}a{{color:#3157c8}}
 </style></head><body>
-<header><h1>FastSSO</h1><p>Enterprise connection broker · control plane</p></header>
+<header><h1>FastSSO</h1><p>Enterprise connection broker · educational control plane</p></header>
 <main><p class="warning"><strong>Educational release.</strong> Live upstream
 authentication and SCIM mutations are disabled. The seeded connection is a
 clearly labelled mock used to exercise the downstream OIDC contract.</p>

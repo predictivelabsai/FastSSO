@@ -9,7 +9,7 @@ import jwt
 from fastapi.testclient import TestClient
 
 import db
-from api_app import BASE_URL, app, signing_key
+from api_app import ADMIN_TOKEN, BASE_URL, app, signing_key
 from seed import seed
 
 
@@ -23,6 +23,32 @@ def client(tmp_path) -> TestClient:
     db.DB_PATH = str(tmp_path / "test.sqlite")
     seed()
     return TestClient(app)
+
+
+def test_public_landing_admin_and_saaspass_guide(tmp_path):
+    with client(tmp_path) as browser:
+        landing = browser.get("/")
+        assert landing.status_code == 200
+        assert "One sign-on contract" in landing.text
+        assert 'href="/integrations/saaspass"' in landing.text
+        assert 'href="/admin"' in landing.text
+        assert "Organizations</h2>" not in landing.text
+
+        admin = browser.get("/admin")
+        assert admin.status_code == 200
+        assert "Organizations</h2>" in admin.text
+
+        guide = browser.get("/integrations/saaspass")
+        assert guide.status_code == 200
+        assert "Connect SAASPASS to FastSSO" in guide.text
+        assert "review-ready, not live" in guide.text
+        assert "signing_public_key" in guide.text
+
+        presets = browser.get("/api/v1/provider-presets").json()["data"]
+        assert any(
+            preset["id"] == "saaspass" and preset["tested"] is False
+            for preset in presets
+        )
 
 
 def test_discovery_and_scim_capability(tmp_path):
@@ -50,7 +76,7 @@ def test_domain_discovery_and_admin_redaction(tmp_path):
         assert browser.get("/api/v1/admin/connections").status_code == 401
         response = browser.get(
             "/api/v1/admin/connections",
-            headers={"Authorization": "Bearer change-me"},
+            headers={"Authorization": f"Bearer {ADMIN_TOKEN}"},
         )
         assert response.status_code == 200
         assert response.json()["data"][0]["config"] == {"redacted": True}

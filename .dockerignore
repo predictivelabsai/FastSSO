@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.sample
+.git
+.github
+.keys
+.pytest_cache
+.venv
+__pycache__
+*.py[cod]
+*.sqlite
+*.sqlite3
+output

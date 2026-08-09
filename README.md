@@ -55,7 +55,9 @@ cp .env.sample .env
 
 Open:
 
-- Admin dashboard: <http://localhost:5015/>
+- Product landing page: <http://localhost:5015/>
+- Admin dashboard: <http://localhost:5015/admin>
+- SAASPASS integration guide: <http://localhost:5015/integrations/saaspass>
 - OpenAPI: <http://localhost:5015/docs>
 - OIDC discovery: <http://localhost:5015/.well-known/openid-configuration>
 - SCIM capabilities: <http://localhost:5015/scim/v2/ServiceProviderConfig>
@@ -97,6 +99,11 @@ Applications may use:
 The examples in `examples/` are optional snippets. FastSSO has no imports from,
 database access to, or runtime dependency on FastCRM, FastERP, or another
 FastCo product.
+
+For a concrete upstream design, read the
+[SAASPASS integration guide](docs/SAASPASS_INTEGRATION.md). It recommends a
+tenant-scoped Generic OIDC connection and records the validation and rollout
+gates that must pass before the adapter can replace its fail-closed boundary.
 
 ## Development
 

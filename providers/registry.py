@@ -38,6 +38,14 @@ PRESETS: dict[str, dict[str, Any]] = {
         "required": ["issuer", "client_id", "client_secret"],
         "tested": False,
     },
+    "saaspass": {
+        "name": "SAASPASS Generic OIDC",
+        "protocol": "oidc",
+        "required": [
+            "issuer", "client_id", "client_secret", "signing_public_key",
+        ],
+        "tested": False,
+    },
 }
 
 
