@@ -41,7 +41,7 @@ def _head(title: str, description: str, extra_css: str = "") -> str:
 def _nav() -> str:
     return """<a class="skip" href="#content">Skip to content</a><nav class="nav" aria-label="Primary">
 <a class="brand" href="/"><span class="mark">FS</span><span>FastSSO</span></a>
-<div class="nav-links"><a class="nav-link" href="/#product">Product</a><a class="nav-link" href="/#security">Security</a>
+<div class="nav-links"><a class="nav-link" href="/#pricing">Pricing</a><a class="nav-link" href="/#product">Product</a><a class="nav-link" href="/#security">Security</a>
 <a class="nav-link" href="/#integrations">Integrations</a><a class="nav-link" href="/docs">API</a>
 <a class="button secondary" href="/admin">Sign In</a></div></nav>"""
 
@@ -72,6 +72,18 @@ def landing_page() -> str:
 <article class="card"><span class="number">02</span><h2>Keep tenants separate</h2><p>Verified domains select tenant-scoped connections. Exact redirect allowlists and normalized subjects preserve the trust boundary.</p></article>
 <article class="card"><span class="number">03</span><h2>See what is unfinished</h2><p>Security-sensitive adapters remain explicit HTTP 501 responses until validation, replay protection, and conformance tests are complete.</p></article>
 </div></section>
+
+<section class="section" id="pricing">
+  <div class="section-heading">
+    <span class="kicker">Pricing</span>
+    <h2>Simple pricing for every FastSME product.</h2>
+    <p>Every Fast* product uses the same two options: bring your own cloud for free, or host with us for €1 per month.</p>
+  </div>
+  <div class="feature-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:32px">
+    <article class="card"><span class="number">BYOC</span><h2>Bring Your Own Cloud</h2><p style="font-size:32px;font-weight:750;color:var(--ink);margin:12px 0">Free</p><p>Self-host on your own infrastructure or cloud. Full control of data and upgrades. No per-seat platform fee.</p></article>
+    <article class="card"><span class="number">HOSTED</span><h2>Host with us</h2><p style="font-size:32px;font-weight:750;color:var(--ink);margin:12px 0">€1 / month</p><p>We run the product for you on FastSME-managed infrastructure. €1 per product per month.</p></article>
+  </div>
+</section>
 <section class="section" id="integrations"><div class="section-heading"><span class="kicker">Integration guide</span><h2>Start with SAASPASS.</h2><p>Use SAASPASS for workforce authentication and MFA, then let FastSSO normalize that identity into the same downstream contract every Fast* application can consume.</p></div>
 <article class="integration-card"><div><div class="partner-name">SAASPASS</div><span class="partner-tag">Proposed upstream OIDC partner</span><p>SAASPASS documents Generic OIDC, Authorization Code, PKCE, signed ID tokens, UserInfo, SAML, and REST integration options.</p><a class="text-link" href="https://saaspass.com/" target="_blank" rel="noopener noreferrer">Visit SAASPASS ↗</a></div>
 <div><div class="mini-flow"><span>SAASPASS<br>MFA + identity</span><b>→</b><span>FastSSO<br>validation + mapping</span><b>→</b><span>Fast* app<br>OIDC + PKCE</span></div>
